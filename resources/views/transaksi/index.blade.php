@@ -47,12 +47,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Daftar Produk</h1>
+                        <h1 class="m-0">Daftar Transaksi</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Daftar Produk</li>
+                            <li class="breadcrumb-item active">Daftar Transaksi</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -66,8 +66,8 @@
                 {{-- main content here --}}
                 <div class="card">
                     <div class="card-header text-right">
-                        @if (Auth::user() && Auth::user()->role === 'admin')
-                            <a href="{{ route('createProduk') }}" class="btn btn-primary" role="button">Tambah Produk</a>
+                        @if (Auth::user())
+                            <a href="{{ route('createTransaksi') }}" class="btn btn-primary" role="button">Tambah Transaksi</a>
                         @endif
                     </div>
                     <div class="card-body p-0">
@@ -76,34 +76,32 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>Nama</th>
-                                    <th>Deskripsi</th>
-                                    <th>Harga</th>
-                                    <th>Gambar</th>
+                                    <th>Produk</th>
+                                    <th>Jumlah</th>
+                                    <th>Total Harga</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse($produks as $produk)
+                                @forelse($transaksis as $transaksi)
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ $produk->nama }}</td>
-                                        <td>{!! $produk->deskripsi !!}</td>
-                                        <td>{{ $produk->harga }}</td>
+                                        <td>{{ $transaksi->user->name }}</td>
+                                        <td>{{ $transaksi->produk->nama }}</td>
+                                        <td>{{ $transaksi->jumlah }}</td>
+                                        <td>{{ number_format($transaksi->jumlah * $transaksi->produk->harga, 0, ',', '.') }}</td>
                                         <td class="text-center">
-                                            <img src="{{ asset('storage/produks/' . $produk->gambar) }}" class="rounded" style="width: 50px">
-                                        </td>
-                                        <td class="text-center">
-                                            @if (Auth::user() && Auth::user()->role === 'admin')
-                                                <a href="{{ route('editProduk', ['id' => $produk->id]) }}" class="btn btn-warning btn-sm">Edit</a>
-                                                <a onclick="confirmDelete(this)" data-url="{{ route('deleteProduk', ['id' => $produk->id]) }}" class="btn btn-danger btn-sm" role="button">Hapus</a>
+                                            @if (Auth::user())
+                                                <a href="{{ route('editTransaksi', ['id' => $transaksi->id]) }}" class="btn btn-warning btn-sm">Edit</a>
+                                                <a onclick="confirmDelete(this)" data-url="{{ route('deleteTransaksi', ['id' => $transaksi->id]) }}" class="btn btn-danger btn-sm" role="button">Hapus</a>
                                             @else
-                                                <a href="{{ route('createTransaksi', ['produk_id' => $produk->id]) }}" class="btn btn-success btn-sm">Beli</a>
+                                                <span class="text-muted">-</span>
                                             @endif
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="6" class="text-center">Belum ada produk</td>
+                                        <td colspan="6" class="text-center">Belum ada transaksi</td>
                                     </tr>
                                 @endforelse
                             </tbody>

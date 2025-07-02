@@ -18,44 +18,7 @@
             <a href="{{ route('register') }}" class="btn btn-outline-light btn-lg mb-2">Daftar Akun Baru</a>
           @else
             <p class="lead">Anda login sebagai <strong>{{ Auth::user()->name }}</strong>.</p>
-            <a href="{{ url('/dashboard') }}" class="btn btn-primary btn-lg mt-2">Pergi ke Dashboard</a>
           @endguest
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Features Section -->
-  <div class="content py-5 bg-white">
-    <div class="container">
-      <h2 class="text-center mb-5">Mengapa Memilih Florence?</h2>
-      <div class="row g-4">
-        <div class="col-md-4">
-          <div class="card text-center h-100 shadow-sm feature-item">
-            <div class="card-body">
-              <i class="fas fa-seedling fa-3x mb-3 text-pink"></i>
-              <h5 class="card-title">Bunga Segar</h5>
-              <p class="card-text">Kami hanya menyediakan bunga terbaik langsung dari petani.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card text-center h-100 shadow-sm feature-item">
-            <div class="card-body">
-              <i class="fas fa-truck-fast fa-3x mb-3 text-pink"></i>
-              <h5 class="card-title">Pengiriman Cepat</h5>
-              <p class="card-text">Bunga Anda akan sampai dengan kondisi prima.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card text-center h-100 shadow-sm feature-item">
-            <div class="card-body">
-              <i class="fas fa-palette fa-3x mb-3 text-pink"></i>
-              <h5 class="card-title">Desain Kustom</h5>
-              <p class="card-text">Buat buket impian Anda dengan florist kami.</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>

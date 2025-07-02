@@ -34,7 +34,7 @@ class ProdukController extends Controller
         $this->validate($request, [
             'nama'       => 'required|min:5',
             'deskripsi'  => 'required|min:10',
-            'harga'      => 'required',
+            'harga'      => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
             'gambar'     => 'required|image|mimes:jpeg,jpg,png|max:2048', 
         ]);
 
