@@ -92,12 +92,15 @@
                                         <td>{{ number_format($transaksi->jumlah * $transaksi->produk->harga, 0, ',', '.') }}</td>
                                         <td class="text-center">
                                             @if (Auth::user())
-                                                <a href="{{ route('editTransaksi', ['id' => $transaksi->id]) }}" class="btn btn-warning btn-sm">Edit</a>
-                                                <a onclick="confirmDelete(this)" data-url="{{ route('deleteTransaksi', ['id' => $transaksi->id]) }}" class="btn btn-danger btn-sm" role="button">Hapus</a>
-                                            @else
-                                                <span class="text-muted">-</span>
+                                                @if (Auth::user()->role === 'admin' || Auth::id() === $transaksi->user_id)
+                                                    <a href="{{ route('editTransaksi', ['id' => $transaksi->id]) }}" class="btn btn-warning btn-sm">Edit</a>
+                                                    <a onclick="confirmDelete(this)" data-url="{{ route('deleteTransaksi', ['id' => $transaksi->id]) }}" class="btn btn-danger btn-sm" role="button">Hapus</a>
+                                                @else
+                                                    <span class="text-muted">-</span>
+                                                @endif
                                             @endif
                                         </td>
+
                                     </tr>
                                 @empty
                                     <tr>

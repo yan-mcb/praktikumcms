@@ -15,11 +15,19 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        $transaksis = Transaksi::all();
-        return view('transaksi.index', [
-            'transaksis' => $transaksis
-        ]);
+        if (auth()->user()->role === 'admin') {
+            // Admin melihat semua transaksi
+            $transaksis = Transaksi::with(['user', 'produk'])->get();
+        } else {
+            // User hanya melihat transaksinya sendiri
+            $transaksis = Transaksi::with(['user', 'produk'])
+                            ->where('user_id', auth()->id())
+                            ->get();
+        }
+
+        return view('transaksi.index', compact('transaksis'));
     }
+
 
     /**
      * Show the form for creating a new resource.
