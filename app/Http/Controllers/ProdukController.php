@@ -49,7 +49,7 @@ class ProdukController extends Controller
             
         ]);
 
-        return redirect(route('daftarProduk'))->with('success', 'Data Berhasil Disimpan');
+        return redirect(route('daftarProduk'))->with('success', 'Data sukses Disimpan');
     }
 
     /**
